@@ -1,0 +1,42 @@
+{
+  "uuid": "2b3b1b65-c143-4c9b-a2a4-4f0b16e1873e",
+  "lastMigration": 29,
+  "name": "Test Env",
+  "port": 3001,
+  "hostname": "",
+  "endpointPrefix": "",
+  "latency": 0,
+  "proxyMode": false,
+  "proxyHost": "",
+  "https": false,
+  "cors": true,
+  "routes": [
+    {
+      "uuid": "31bf2d46-7c16-4433-b3b7-bf5cac3902a2",
+      "method": "get",
+      "endpoint": "hello",
+      "documentation": "Basic hello-world endpoint",
+      "enabled": true,
+      "responses": [
+        {
+          "uuid": "a1e5b98d-0e21-4941-9d63-501b5f3bc4d6",
+          "statusCode": 200,
+          "label": "Success",
+          "latency": 0,
+          "headers": [
+            { "key": "Content-Type", "value": "application/json" }
+          ],
+          "body": "{\n  \"message\": \"Hello from Mockoon!\"\n}",
+          "bodyType": "INLINE",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "folders": [],
+  "proxyReqHeaders": [],
+  "proxyResHeaders": [],
+  "headers": [],
+  "data": [],
+  "rootChildren": []
+}
