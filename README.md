@@ -98,6 +98,9 @@ docker system prune
 
 ## Multi-command Containers
 
+
+### Example with Redis
+
 - [Source Video - Connect to Redis CLI](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11436668#overview)
 - [Source Video - The `it` flag](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11436670#overview). Explains the `STDIN`, `STDOUT`, and `STDERR`and how it relates to this flag.
 
@@ -122,6 +125,39 @@ OK
 ```
 The above command will start up a terminal within redis-cli and now commands can be executed against the redis instance.
 
+### Get full terminal access with `sh`
+
+- [Video Tutorial](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11436674#overview)
+
+This is extremely useful for debugging your container. Start with full terminal access. `sh` is a command processor or shell. This is like Bash or Powershell.
+
+```
+docker exec -it 8e4bed4263a7 sh
+```
+
+```
+PS C:\Code\[user]\docker-study> docker exec -it 8e4bed4263a7 sh
+# cd ~/
+# ls
+# cd /
+# ls
+bin  boot  data  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+# echo hi there
+hi there
+# export b=5
+# echo $b
+5
+# redis-cli
+127.0.0.1:6379>
+```
+
+💡Quick tip: If you're in the CLI and `CRTL+C` does not work, try `CTRL+D` and that should work.
+
+`docker run -it [image] sh` will also open up a Shell and it is quite useful to poke around without some other process running. The downside is that you will not be running any other process. So the usual process that will run when you run the docker container will not run at all.
+
+```
+docker run -it busybox sh
+```
 
 # References
 
@@ -129,3 +165,15 @@ The above command will start up a terminal within redis-cli and now commands can
 
 - [busybox](https://hub.docker.com/_/busybox)
 - [hello-world](https://hub.docker.com/_/hello-world)
+
+## Useful Git Repositories
+
+#### Yours
+- [Spring Kafka and Avro Local Repository](https://github.com/rob-bl8ke/spring-kafka-avro-local) - A repository you maintain, that explores the ability to run Kafka and an Avro compatible schema registry locally on the development machine. The [`docker-compose.yml`](https://github.com/rob-bl8ke/spring-kafka-avro-local/blob/main/docker-compose.yml) file also loads akhq (a lightweight UI for Kafka), and Mockoon. The prototype contains detail as to how one might interact and use these instances once loaded.
+- [Udemy Course: Build a Microservices app with .Net and NextJS from scratch](https://www.udemy.com/course/build-a-microservices-app-with-dotnet-and-nextjs-from-scratch/?couponCode=MT150725G1) - There's an example of a [`docker-compose.yml`](https://github.com/rob-bl8ke/car-auction/blob/main/docker-compose.yml) that uses Postgres, MongoDB, and RabbitMQ. This repository also has a README that details how to work with the instances.
+- [Spring Boot Basic Authentication](https://github.com/rob-bl8ke/spring-basic-auth) repository has a [`compose.yml`](https://github.com/rob-bl8ke/spring-basic-auth/blob/main/compose.yaml) using MySQL.
+- A Spring Boot PostgreSQL POC which has some information as to how to query the state of the database in VS Code... see [`docker-compose.yml`](https://github.com/rob-bl8ke/spring-kafka-postgres-testing/blob/main/docker-compose.yaml)
+
+#### Other
+
+- [poc-spring-boot-kafka](https://github.com/pgolpejas/poc-spring-boot-kafka) - Is a resource you discovered that uses Testcontainers and docker-compose to spin up Kafka (with the old ZooKeeper), RedPanda, Loki, Grafana, PostgresSQL, Prometheus, Tempo and uses a shared network.
