@@ -159,6 +159,50 @@ hi there
 docker run -it busybox sh
 ```
 
+
+## `Dockerfile`
+
+```docker
+# Step 1: Set the operating system
+FROM alpine
+
+# Step 2: Download and install dependencies
+RUN apk add --update gcc
+RUN apk add --update redis
+
+# Step 3: Tell the image what to do when it starts as container
+CMD ["redis-server"]
+```
+
+The easiest way to build a `Dockerfile` is to...
+
+```
+docker build .
+```
+However, it is better to tag your images...
+
+```bash
+# Convention: YOUR_DOCKER_ID/REPO:VERSION
+docker build -t bugsbunny/redis:latest .
+
+# Run it
+docker run bugsbunny/redis:latest
+# or
+docker run bugsbunny/redis # latest version used by default
+```
+
+Technicaly, only the version is the tag. But the approach is referred to as "tagging your image".
+
+
+#### The build cache, intermediate containers, and temporary images
+
+- [Udemy Video](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11436706#overview) breaks down the build process in detail while looking at an simple redis example using alpine.
+    - It explains intermediate containers and temporary images that are created and removed during the build pocess. Also take a look [at this one](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11436708#overview).
+    - [Rebuilds and cache](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/learn/lecture/11436712#overview) shows how when commands are added, the cache is still used to fetch previous images.
+
+#### Examples
+- [Mockoon](https://github.com/rob-bl8ke/docker-study/tree/main/mockoon) for details of how to build and run.
+
 # References
 
 ## Images
