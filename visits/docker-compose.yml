@@ -1,0 +1,13 @@
+version: '3'
+services:
+  redis-server:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+  node-app:
+    restart: on-failure
+    build: .
+    ports:
+      - "4001:8081"
+    depends_on:
+      - redis-server
